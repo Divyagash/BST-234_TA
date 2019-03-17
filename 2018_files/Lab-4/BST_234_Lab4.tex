@@ -1,0 +1,287 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{listings}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+
+
+\title[BST 234 Lab IV]{BST 234 - Lab IV Complexity Classes and Parallelization} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Eleni Elia } % Your name
+\institute[ ] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+  \\ % Your institution for the title page
+\medskip
+\textit{ } % Your email address
+}
+\date{2/14/18}%\date{\today} % Date, can be changed to a custom date
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+ 
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+ 
+
+\begin{frame}
+\frametitle{Complexity Class Definitions}
+ \begin{itemize}
+ \item (P):Polynomial time algorithms\\
+ \begin{itemize}
+ \item A decision which may be solved using a deterministic Turing machine in a polynomial amount of time.
+ \end{itemize} 
+{\small *Deterministic Turing machine: A formal mathematical model for defining an abstract machine capable of simulating any algorithm. Don't worry about knowing this! }
+\item (NP):Nondeterministic Polynomial time algorithms
+\begin{itemize}
+\item Verifying an instance takes polynomial time.
+\end{itemize}
+{\small *Important to note this does not mean non-polynomial but instead means non-deterministic polynomial!}
+\item (NPH):NP-Hard algorithms
+Problems that are at least as hard as the hardest problems in NP.\\
+{\small Consider an NP-hard algorithm A that can call an oracle to solve A, then it solves B, an NP algorithm, in polynomial time.}
+ \end{itemize}
+ \end{frame}
+
+
+
+\begin{frame}
+\frametitle{Complexity Class Definitions continued}
+\begin{itemize}
+
+\item (NPC):NP-Complete algorithms
+\begin{itemize}
+\item Both NP and NP-Hard. Although the verification may be performed in polynomial time,there is no efficient way to locate a solution in the first place.
+\end{itemize}
+
+\item (NC):Nick?s Class
+\begin{itemize}
+\item Algorithms solvable in logarithmic time with a polynomial number of parallel processors. 
+\end{itemize}
+{\small Intuitively, the logarithmic problem size on a polynomial number processors guarantees an efficient (interesting) speed up.}
+\end{itemize}
+NC is a subset of P but whether NC=P is unproven, i.e.  there may exist purely sequential algorithms that may not be significantly sped up.
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Complexity Classes Relationship}
+ 
+\begin{figure}
+%\includegraphics[width=0.8\linewidth]{compl}
+\end{figure}
+\end{frame}
+
+ \begin{frame}
+ \frametitle{Efficiency and Speedup}
+ 
+ For a sequential algorithm A, the run-time complexity is $T_{A}(n)$.\\
+ Parallelized on p processors, the run-time complexity is  $T_{p}(n)$.\\
+ \vspace{1cm}
+ 
+\textbf{ Algorithm efficiency: }$$E_{p}(n)=\frac{T_{1}(n)}{pxT_{p}(n)} $$
+\textbf{ Algorithm speed-up:}$$S_{p}(n)=\frac{T_{A}(n)}{T_{p}(n)}$$
+ \end{frame}
+%------------------------------------------------
+
+
+\begin{frame}
+ \frametitle{Threading versus Multiprocessing}
+Various parallel architectures were introduced in the lecture notes. \\
+Notably, we introduced the parallel random access memory(PRAM) architecture.  While useful in theory, real hardware is different and we achieve parallelization through two main concepts: 
+\begin{itemize}
+\item Threading
+\item Multiprocessing
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Threading versus Multiprocessing}
+ 
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+
+ 
+\begin{block}{Threading:}
+A single shared memory is accessible to individual treads/sequences\\
+{\color{blue} -Multiple people adding pieces to the same puzzle}
+\end{block}
+
+\begin{block}{Multiprocessing:}
+Each process is given its own memory space\\
+{\color{blue}-Each person working on their own part of the puzzle}
+\end{block}
+ 
+\column{.5\textwidth} % Right column and width
+
+\begin{figure}
+%\includegraphics[width=0.56\linewidth]{puzzle1}
+\end{figure}
+
+\begin{figure}
+%\includegraphics[width=0.65\linewidth]{puzzle}
+\end{figure}
+
+ 
+
+\end{columns}
+ 
+
+\end{frame}
+
+
+\begin{frame}
+ \frametitle{Techniques for Parallelization}
+ 
+ \begin{itemize}
+ \item Embarrassingly Parallel
+ \item Divide-and-Conquer Strategies
+ \item Pipelined Computations
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Parallelization in Python}
+\begin{block}{A few options for parallelizing code }
+\begin{itemize}
+\item xmlrpclib
+\item threading
+\item multiprocessing
+\item pp (parallel python)
+\end{itemize} 
+\end{block} 
+
+\begin{itemize}
+\item Easy enough to augment existing code by dropping in the parallelization
+\item Important to note that each python interpreter has a single global interpreter lock (GIL)
+\end{itemize}  
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Global Interpreter Lock - a thread-safe mechanism}
+\begin{itemize}
+ 
+
+\item Executes only one statement at a time (so-called serial processing, or single-threading) to prevent conflicts between threads. 
+\item We can spawn multiple subprocesses to avoid some of the GIL?s disadvantages.
+\end{itemize}
+\begin{figure}
+%\includegraphics[width=0.8\linewidth]{gil_source_pythoncertgithub}
+\end{figure}
+\url{https://www.youtube.com/watch?v=ph374fJqFPE}
+\url{http://www.dabeaz.com/GIL/gilvis/fourthread.html}
+\end{frame}
+ 
+
+
+\begin{frame}
+\frametitle{Vectorizing}
+Similar to R, see the numpy module for vectorize
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+\url{https://pymotw.com/3/multiprocessing/index.html} %module-multiprocessing
+\url{https://pymotw.com/3/threading/index.html} %module-threading
+\url{http://www.davekuhlman.org/python_multiprocessing_01.html}
+\url{http://www.dabeaz.com/GIL/gilvis/index.html}
+\end{frame}
+
+
+ 
+%http://sebastianraschka.com/Articles/2014_multiprocessing.html
+%https://docs.python.org/dev/library/multiprocessing.html
+%https://www.ploggingdev.com/2017/01/multiprocessing-and-multithreading-in-python-3/
+ 
+%----------------------------------------------------------------------------------------
+
+\end{document}

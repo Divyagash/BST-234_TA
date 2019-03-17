@@ -1,0 +1,180 @@
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{tikz}
+\usetheme{Madrid}
+\newcommand{\Perp}{\perp \! \! \! \perp}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title[BST 234]{BST 234: Lab - 8}
+\author[Divy Kangeyan]{Divy Kangeyan}
+%\institute{Stat 365R}
+\date{\today}
+
+\begin{document}
+
+	%
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	%IF YOU INCLUDE TABLE OF CONTENTS
+	%\section[Outline]{}
+	%\frame{\tableofcontents}
+	
+\section{Stability of Algorithm}
+
+
+
+
+\begin{frame}
+\frametitle{Forward and backward error}
+
+\begin{itemize}
+\item \textbf{Forward Error}: Let x be a real number and let $f: \mathbb{R} \rightarrow \mathbb{R}$ be a function. If $\hat{y}$ is a real number that is an approximation to y = f(x), then forward error in $\hat{y}$ is the difference $\Delta y = \hat{y} - y$ 
+\item \textbf{Backward Error}: Let x be a real number and let $f: \mathbb{R} \rightarrow \mathbb{R}$ be a function. If $\hat{y}$ is a real number that is an approximation to y = f(x), that is $\hat{y} = f(\hat{x})$ for some real number $\hat{x}$ then backward error is the difference $\Delta x = \hat{x} - x$ 
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Forward and backward error}
+
+\begin{itemize}
+
+\item Question: sin(x) can be approximated by following expression $sin(x) = x - \frac{x^3}{3!}$. Calculate backward and forward error for sin(0.1). \\Hint: arcsin(0.09983333) = 0.09999991
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Matrix Norm}
+
+\begin{itemize}
+\item Defn: $||A|| = max_{x \neq 0} \frac{||Ax||}{||x||}$
+\item Depending on the vector norm being used matrix norm would differ
+\item Matrix norm corresponding to vector 1-norm $||A||_1 = max_j \sum_{i=1}^n |a_{ij}|$
+\item Matrix norm corresponding to vector $\infty$-norm $||A||_{\infty} = max_i \sum_{i=1}^n |a_{ij}|$
+\item Some matrix norm identities in Python
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Condition number}
+
+\begin{itemize}
+\item Defn: $cond(A) = ||A|| \times ||A^{-1}||$
+\item if A is singular cond(A) = $\infty$
+\item Geometric interpretation: Ratio of maximum stretching to maximum shrinking a matrix does to any nonzero vector
+\item Python demonstration with some condition number identities
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Solving systems of linear equations - Gaussian Elimination}
+
+\begin{itemize}
+\item For $Ax = b$ where A is a non-singular matrix and b is an arbitrary vector, there exists a unique solution for x 
+\item Easier to solve is A is a triangular matrix
+\item For non-triangular matrix A, it can be solved by factorization i.e. LU factorization
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{LU Factorization Algorithm}
+
+\begin{itemize}
+\item For matrix $A$: set $U = A$ and $L = I$
+\item $n = rank(A)$
+\item 
+\begin{lstlisting}
+for i = 1:n-1
+	for j = i+1:n
+  		L[j,i] = U[j,i]/U[i,i] 
+  		U[j,i:n] = U[j,i:n] - L[j,i] U[i,i:n]
+  	end
+end
+\end{lstlisting}
+\item Homework: LU/Gaussian elimination with pivoting
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{SPD Matrices and Cholesky factorization}
+
+\begin{itemize}
+\item Defn for SPD: $n \times n$ real symmetric matrix $M$ is positive definite if $z^TMz > 0$ for every non-zero column vector z of n real numbers.
+\item If a matrix $A$ is SPD it's LU decomposition will be: $A = LL^T$
+\item If a matrix is SPD then performing Cholesky factorization reduces the time and memory requirements compared to usual LU decomposition
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{ Cholesky factorization}
+for an SPD matrix A set $L = I$\\
+
+for k = 1:n\\
+\quad L[k, k] = (A[k,k] - $\sum_{j = 1}^{k-1}(L[k,j])^2)^{\frac{1}{2}}$ \\
+\quad  for i = k+1:n\\
+\quad \quad L[i,k] =$ \frac{1}{L[k,k]}(A[i,k] - \sum_{j=1}^{k-1}L[i,j]\times L[k,j])$\\
+\quad  end\\
+end \\
+
+Homework: Python implementation 
+
+%	for j = k+1:n
+ % 		L[j,i] = U[j,i]/U[i,i] 
+ % 		U[j,i:n] = U[j,i:n] - L[j,i] U[i,i:n]
+ % 	end
+%end
+
+
+
+\end{frame}
+
+
+\end{document}

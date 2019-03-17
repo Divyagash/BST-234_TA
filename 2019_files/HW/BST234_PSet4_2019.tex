@@ -1,0 +1,165 @@
+%----------------------------------------------------------------------------------------
+%	Packages and margins
+%----------------------------------------------------------------------------------------
+\documentclass[12pt]{article}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage[margin=1in]{geometry} % Page setup
+\usepackage[disable]{todonotes}
+\usepackage{setspace,epstopdf,amsmath,amsfonts,amssymb,amsthm}
+\usepackage{marginnote,datetime,enumitem,subfigure,rotating,fancyvrb}
+\usepackage{hyperref,float}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphics}
+\usdate
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+%----------------------------------------------------------------------------------------
+% Header and footer set up
+%----------------------------------------------------------------------------------------
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass: \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+%----------------------------------------------------------------------------------------
+% Useful commands
+%----------------------------------------------------------------------------------------
+% Number equations within align* environment
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+% Bold vectors
+\renewcommand{\vec}[1]{\mathbf{#1}}
+% Indepedence symbol
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+% How large to make matrices
+\setcounter{MaxMatrixCols}{20}
+% Removes indentation from paragraphs
+\setlength\parindent{0pt} 
+%----------------------------------------------------------------------------------------
+% Page structure commands - please ignore
+%----------------------------------------------------------------------------------------
+% Header and footer when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+%----------------------------------------------------------------------------------------
+%	Student name and class
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Problem Set\ \#5} % Assignment title
+\newcommand{\hmwkClass}{BST\ 234} % Course/class
+\newcommand{\hmwkAuthorName}{Student name} % Your name
+%----------------------------------------------------------------------------------------
+\begin{document}
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+\section{}
+Which of the following two ways to compute a polynomial is stable? Which one is the more efficient algorithm?
+\begin{enumerate}
+\item $p(x) = a_0 + a_1x + \dots + a_nx^n, x \in \mathbb{R}$
+\item $p(x) = a_0 + x(a_1 + x(a_2 + x(a_3 + \dots + x (a_{n-1} + x a_n) \dots )))$
+\end{enumerate}
+\textit{Solution:}\\
+
+\end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+% PROBLEM 2
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+\section{}
+Compute the condition number for the following two matrices. \\ \\
+\begin{minipage}{0.4\textwidth}
+\[
+A = 
+\begin{bmatrix}
+    2 & 1 & 1 \\
+    1 & 2 & 1 \\
+    1 & 1 & 2
+\end{bmatrix}
+\]
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\[
+B = 
+\begin{bmatrix}
+    168 & 113  \\
+    113 & 76
+\end{bmatrix}
+\]
+\end{minipage} \\
+
+\textit{Solution:}\\ 
+
+\end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+% PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+
+\begin{homeworkProblem}
+\section{}
+Please write matrix (1) (slide 3  in BST\_234\_Numerical\_Aspects\_of\_Algorithms March 4) in:
+\begin{enumerate}
+\item triplet format
+\item csr format
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+\section{}
+ Given 2 sparse ($n \times n$)-times matrices, A and B. What is the expected sparsity of $A + B $ and $A \times B$
+ \end{homeworkProblem}
+ 
+ \begin{homeworkProblem}
+ \section{}
+ For genotype matrices, define a new csr format that takes the special data structure of genotype data into account.
+ \begin{itemize}
+ \item Using simulation studies (by drawing from the provided MAF data), how much storage space do you save on average?
+ \item At least how much storage space do you save in 95\% of the cases/simulation studies?
+ \end{itemize}
+  \end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+\end{document}

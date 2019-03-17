@@ -1,0 +1,16 @@
+\frametitle{Attribute reference}
+
+
+
+\begin{Verbatim}
+class MaxHeap(object):
+	#construct - empty array
+	def __init__(self, data=[]):
+		self.data=data
+
+	def isEmpty(self):
+		return(len(self.data)==0)
+
+\end{Verbatim}
+
+

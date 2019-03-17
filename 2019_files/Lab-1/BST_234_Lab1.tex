@@ -1,0 +1,132 @@
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{tikz}
+\usetheme{Madrid}
+\newcommand{\Perp}{\perp \! \! \! \perp}
+
+\title[BST 234]{BST 234: Lab - 1}
+\author[Divy Kangeyan]{Divy Kangeyan}
+%\institute{Stat 365R}
+\date{\today}
+
+\begin{document}
+	%
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	%IF YOU INCLUDE TABLE OF CONTENTS
+	%\section[Outline]{}
+	%\frame{\tableofcontents}
+	
+
+
+
+
+\begin{frame}
+\frametitle{Normalized Floating Point Representation}
+
+\begin{center}
+$x = \pm m * b^{\pm e}$
+\end{center}
+
+\begin{itemize}
+\item base $b \in \mathbb{N}$ and $b > 1$
+\item mantissa $m = m_1b^{-1}+...+m_rb^{-r} \in \mathbb{R}$
+\item exponent $e = e_{s-1}b^{s-1}+...+e_0b^0 \in \mathbb{N}$
+\item digits $m_i, e_i \in 0,...,b-1$
+\item significant digits $s \in \mathbb{N}$ and $r \in \mathbb{N}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Practice: Normalized Floating Point Representation}
+
+Express the number x = 10 in normalized floating point format for the base b = 2: 
+\pause
+
+\begin{itemize}
+\item Find k such that $b^k \leq x \leq b^{k+1}$
+$$2^3 \leq 10 \leq 2^4$$ \pause
+\item Factor x into $b^k, b^{k-1},...$
+$$10 = 2^3 \times 1 + 2^2 \times 0 + 2^1 \times 1 + 2^0 \times 0$$ \pause
+\item Add terms and factor out $b^{k+1}$
+$$10 = 2^4(2^{-1} \times 1 + 2^{-2} \times 0 + 2^{-3} \times 1 + 2^{-4} \times 0)$$ \pause
+\item Answer: $x = (.101)_2 * 2^4$
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Practice: Normalized Floating Point Representation}
+
+Express the number x = 100 in normalized floating point format for the base b = 3: 
+\pause
+
+\begin{itemize}
+\item Find k such that $b^k \leq x \leq b^{k+1}$
+\item Factor x into $b^k, b^{k-1},...$
+\item Add terms and factor out $b^{k+1}$ \pause
+\item Answer: $x = (.10201)_3 * 3^5$
+
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Machine Precision}
+Definition:
+$$eps := \frac{1}{2}b^{-r+1}$$
+
+For the IEEE-format:
+$$eps_{IEEE} \leq \frac{1}{2}2^{-51}$$
+
+\begin{itemize}
+\item \textit{Python demonstration}
+\end{itemize}
+\pause
+
+
+$$\frac{7}{3} = 1.0010101010101010101010101010101010101010101010101011*2^1$$
+ $$\frac{4}{3} = 1.0101010101010101010101010101010101010101010101010101*2^0$$
+
+$$\frac{7}{3} -\frac{4}{3} =  1.0000000000000000000000000000000000000000000000000001*2^0$$
+$$\frac{7}{3} -\frac{4}{3} - 1 = 2^{-52} = \epsilon$$
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Floating point arithmetic}
+\begin{itemize}
+\item Since floating point arithmetic is inherently approximate and not exact following symbols are used: $\oplus,\ominus, \otimes,\oslash$
+\item  $(x \oplus y) \oplus z \neq x \oplus (y \oplus z) $ (Associative law doesn't hold)
+\item $(x \oplus y) \otimes z \neq (x \otimes z) \oplus (y \otimes z) $ (Distributive law doesn't hold)
+\item $x \oplus y = x$ for $|y| \leq \frac{|x|}{b}eps$
+\item \textit{Python demonstration}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Using Karatsuba algorithm for multiplication}
+Use Karatsuba algorithm to find the results for $15 \times 24$ in binary 
+
+
+\end{frame}
+
+
+\end{document}

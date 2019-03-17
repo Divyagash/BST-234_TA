@@ -1,0 +1,17 @@
+\frametitle{LU Factorization Algorithm}
+
+\begin{itemize}
+\item For matrix $A$: set $U = A$ and $L = I$
+\item $n = rank(A)$
+\item
+\begin{lstlisting}
+for i = 1:n-1
+	for j = i+1:n
+  		L[j,i] = U[j,i]/U[i,i]
+  		U[j,i:n] = U[j,i:n] - L[j,i] U[i,i:n]
+  	end
+end
+\end{lstlisting}
+\item Homework: LU/Gaussian elimination with pivoting
+\end{itemize}
+

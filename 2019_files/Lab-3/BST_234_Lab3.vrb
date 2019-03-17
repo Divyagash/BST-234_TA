@@ -1,0 +1,16 @@
+\frametitle{Class Vs. Instance variables}
+
+\begin{Verbatim}
+class Fish:
+  self.gills = True
+  self.scales = True
+  def __init__(self, muscle_color, body_type):
+    self.muscle_color = muscle_color
+    self.body_type = body_type
+
+
+\end{Verbatim}
+
+
+
+

@@ -1,0 +1,53 @@
+\documentclass[a4paper]{article}
+%\usepackage{C:/R/R-2.13.1/share/texmf/tex/latex/Sweave}
+\usepackage{amsmath,amsfonts,amssymb,verbatim,graphicx,float,anysize,setspace,natbib,fancyvrb,multicol,mathrsfs}
+
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{breqn}
+\usepackage{titling}
+\usepackage[margin = 1 in]{geometry}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\parskip = \baselineskip
+\setlength\parindent{0pt}
+
+\title{Project Description}
+\author{BST-234}
+
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section {Data}
+In a whole-genome sequencing study, 20000 study subjects have been sequenced.  First 10000 subjects are cases and the remaining are controls. Data provided shows the marker status for 50 loci. marker status is binary with 1 indicating the existence of the marker in the subject.We want to test the association between these 50 loci and the affection status (case vs. control). No other covariates are provided. \\
+
+\textbf{You will use SKAT(Sequence Kernel Association Test) to conduct this analysis and assess the significance using either asymptotic theory or permutations (1000 replicates).} 
+
+
+\section {Deliverables}
+\begin{itemize}
+\item Software implementation of a numerically efficient and stable algorithm to do the analysis (in Python). Consider parallelization as well. \\
+Name your implementation as \texttt{[Team_number]_BST234_FinalProject.py}
+\item 10 minutes presentation (7 minutes for presentation and 3 minutes Q \& A)
+\item Report (max: 4 pages). \\
+Name your report as  \texttt{[Team_number]_BST234_FinalProject.pdf}
+\end{itemize}
+
+
+\section {Deadline}
+\begin{itemize}
+\item Code for your analysis is due on Friday, April 27th 11:59 pm
+\item In-class presentation will be on May 2nd. Please upload the slides to Canvas by 9 am 
+\item Report is due on May 2nd 9 am
+\end{itemize}
+
+
+\end{document}

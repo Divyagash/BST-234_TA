@@ -1,0 +1,137 @@
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{tikz}
+\usetheme{Madrid}
+\newcommand{\Perp}{\perp \! \! \! \perp}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title[BST 234]{BST 234: Lab - 9}
+\author[Divy Kangeyan]{Divy Kangeyan}
+%\institute{Stat 365R}
+\date{\today}
+
+\begin{document}
+
+	%
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	%IF YOU INCLUDE TABLE OF CONTENTS
+	%\section[Outline]{}
+	%\frame{\tableofcontents}
+	
+\section{Stability of Algorithm}
+
+
+
+
+\begin{frame}
+\frametitle{Minimizing Least Squares}
+
+\begin{itemize}
+\item Normal Equations: $A^TAx = A^Tb$
+\item If $\kappa(A)$ is large then $\kappa(A^TA)$ will be even larger and near singular matrix
+\item Hence inverting $A^TA$ becomes unstable
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{QR decomposition}
+
+\begin{itemize}
+\item Given $m \times n$ A, with $m > n$, QR decomposition produce Q, an orthogonal $m \times m$ matrix and R, an $n \times n$ upper triangular matrix such that
+   \begin{align}
+    A &= Q \begin{bmatrix}
+           R \\
+           O \\
+         \end{bmatrix}
+  \end{align}
+\item Orthogonal matrix: $Q^T = Q^{-1}$
+\item Hence least square problem becomes:
+\begin{align}
+min ||r||^2_2 &=min  ||b - Ax||^2_2\\
+&= min ||b - Q \begin{bmatrix}
+           R \\
+           O \\
+         \end{bmatrix}x ||^2_2\\
+&=min ||Q^Tb - \begin{bmatrix}
+           R \\
+           O \\
+         \end{bmatrix}x ||^2_2
+\end{align}
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Getting Q and R}
+
+\begin{itemize}
+\item Givens Rotation: Method for introducing zeros in a matrix by rotating the different columns/rows in a matrix
+\item Householder transformation: Orthogonal reflection transformation  (Implementation)
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Householder transformation}
+
+\begin{itemize}
+\item Time complexity for Householder transformation: ~$mn^2 - \frac{n^3}{3}$
+\item For Given Rotation the time complexity is : ~$3mn^2 - n^3$
+\item 50\% more work to do Givens Rotation compared to Householder transformation
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solving non-linear equations - Root finding problem}
+
+\begin{itemize}
+\item Solution only exist and is unique in very special cases 
+\item Bisection Method: Convergence is guaranteed but extremely slow
+\end{itemize}
+
+\end{frame}
+
+\end{document}
